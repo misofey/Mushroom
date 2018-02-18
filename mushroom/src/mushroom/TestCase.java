@@ -1,12 +1,14 @@
 package mushroom;
 
+import java.awt.geom.AffineTransform;
 import java.util.*;
+
 
 
 
 public class TestCase {
 	
-	private boolean[][] affected;
+	private HashSet<String> affected;
 	private int size;
 	int affectedNum;
 	int darab;
@@ -21,34 +23,25 @@ public class TestCase {
 		this.xek=xek;
 		this.yok=yok;
 		this.meretek=meretek;
-		affected= new boolean[size][size];
+		this.affected = new HashSet<String>();
 	}
 	
 	public int gombaGenerate() {
 		HashMap<Integer, Gomba> terkep = new HashMap<>();
+	
 		for(int i =0; i<darab; i++) {
-			terkep.put(i, new Gomba(meretek[i], xek[i], yok[i]));
+			terkep.put(i, new Gomba(meretek[i], xek[i], yok[i], size));
 		}
-		boolean[][] affectedByThis;
 		for(int i=0; i<darab; i++) {
-			affectedByThis = terkep.get(i).affectedCount(size);
-			for (int j = 0; j < darab;j++) {
-				for (int j2 = 0; j2 < darab; j2++) {
-					if (affectedByThis[j][j2]) {
-						affected[j][j2]=true;
-					}
-				}
-			}
+			affected.addAll(terkep.get(i).affectedCount());
+			//visszad egy [a fertozottt negyzetek szama][a kooridinatajuk
+			//kiszedi belole az ertekeket es belerakja az affected hashmapbe
 		}
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
-				if (affected[i][j]) {
-					affectedNum++;
-				}
-			}
-		}
+		//for (String string : affected) {
+		//	System.out.println(string);
+		//}
+		affectedNum = affected.size();
 		return affectedNum;
-		
 	}
 	
 	

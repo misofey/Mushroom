@@ -1,26 +1,26 @@
 package mushroom;
 
-
-import java.io.Console;
-import java.util.*;
-
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		
 		int caseNum =sc.nextInt();
 		int size;
 		int n;
-		double[] xek = new double[1000000];
-		double[] yok = new double[1000000];
-		double[] rek = new double[1000000];
+		double[] xek;
+		double[] yok;
+		double[] rek;
 		
 		HashMap<Integer, TestCase> caseStore = new HashMap<>();
 		for (int i = 0; i < caseNum; i++) {
 			size = sc.nextInt();
 			n= sc.nextInt();
+			xek = new double[size];
+			yok = new double[size];
+			rek = new double[size];
 			for(int j =0; j<n; j++) {
 				xek[j]= sc.nextDouble();
 				yok[j]=sc.nextDouble();
@@ -33,6 +33,7 @@ public class Main {
 		for (int i = 0; i < caseNum; i++) {
 			System.out.println(caseStore.get(i).gombaGenerate());
 		}
+		sc.close();
 	}
 	
 }
